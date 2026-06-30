@@ -1,6 +1,6 @@
 {
   "name": "tiny-kit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "description": "A tiny collection of pure string helpers — a sandbox repo for test-driving plumbbob + checkride.",
   "type": "module",
