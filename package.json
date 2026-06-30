@@ -2,8 +2,10 @@
   "name": "tiny-kit",
   "version": "0.0.0",
   "private": true,
-  "description": "A tiny collection of pure string helpers — a throwaway repo for test-driving plumbbob + checkride.",
+  "description": "A tiny collection of pure string helpers — a sandbox repo for test-driving plumbbob + checkride.",
   "type": "module",
+  "license": "MIT",
+  "author": "Rob McLarty <hello@robmclarty.com> (https://robmclarty.com)",
   "scripts": {
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
