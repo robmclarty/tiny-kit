@@ -1,7 +1,7 @@
 # tiny-kit
 
 A tiny collection of pure string helpers, wired up so you can **test-drive
-plumbbob + [checkride](https://www.npmjs.com/package/checkride) from a
+[plumbbob](https://github.com/robmclarty/plumbbob) + [checkride](https://github.com/robmclarty/checkride) from a
 fresh-repo experience**. Clone it, run the check gate, and walk one full
 plumbbob planning/execution cycle against a spec small enough to finish in
 minutes.
@@ -19,7 +19,7 @@ pnpm install
 pnpm check   # the definition of done — should print a green summary
 ```
 
-`pnpm check` runs [checkride](https://www.npmjs.com/package/checkride), the
+`pnpm check` runs [checkride](https://github.com/robmclarty/checkride), the
 single source of truth for "done": exit 0 means the work is complete. See
 [AGENTS.md](./AGENTS.md) for the full contract.
 
