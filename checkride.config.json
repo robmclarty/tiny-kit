@@ -11,7 +11,8 @@
     "format": {
       "command": "pnpm",
       "args": ["exec", "biome", "format", "--write", "."],
-      "description": "Biome auto-format (writes fixes in place)"
+      "description": "Biome auto-format (writes fixes in place)",
+      "order": "first"
     }
   }
 }

@@ -15,8 +15,8 @@ importers:
         specifier: ^4.1.9
         version: 4.1.9(vitest@4.1.9)
       checkride:
-        specifier: ^0.1.5
-        version: 0.1.5
+        specifier: ^0.1.6
+        version: 0.1.6
       typescript:
         specifier: ^5.7.0
         version: 5.9.3
@@ -469,8 +469,8 @@ packages:
     resolution: {integrity: sha512-NUPRluOfOiTKBKvWPtSD4PhFvWCqOi0BGStNWs57X9js7XGTprSmFoz5F0tWhR4WPjNeR9jXqdC7/UpSJTnlRg==}
     engines: {node: '>=18'}
 
-  checkride@0.1.5:
-    resolution: {integrity: sha512-Kmw2McAH815CdbrPDH1W9JekZg04ZmtZ4ICD8lCBAiZvRY7LI17s9k2L91tOcAEmiVTL70CkxmmWsYgNmJtW1w==}
+  checkride@0.1.6:
+    resolution: {integrity: sha512-z9plHoiEXPCFyl+E8n6yis2fMjgKyljwmAnDjzlBU2p4m+IJCSFIKfijrBCh+43p6Pr8MyS9Po59fxIhtqUJrw==}
     engines: {node: '>=22.18.0', pnpm: '>=9.0.0'}
     hasBin: true
 
@@ -984,7 +984,7 @@ snapshots:
 
   chai@6.2.2: {}
 
-  checkride@0.1.5: {}
+  checkride@0.1.6: {}
 
   convert-source-map@2.0.0: {}
 
