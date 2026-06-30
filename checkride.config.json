@@ -1,0 +1,6 @@
+{
+  "checks": {
+    "types": "tsc",
+    "links": "links"
+  }
+}

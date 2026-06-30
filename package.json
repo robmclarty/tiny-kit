@@ -1,0 +1,18 @@
+{
+  "name": "tiny-kit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A tiny collection of pure string helpers — a throwaway repo for test-driving plumbbob + checkride.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "checkride"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.9",
+    "checkride": "^0.1.5",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.0"
+  }
+}

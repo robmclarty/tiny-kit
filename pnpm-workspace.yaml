@@ -1,0 +1,10 @@
+allowBuilds:
+  esbuild: true
+
+# This throwaway test repo disables pnpm's global minimum-release-age gate so it
+# can install freshly-published packages (e.g. checkride) without the 48h wait.
+minimumReleaseAge: 0
+
+# Let esbuild (vitest's engine) run its postinstall to fetch its native binary.
+onlyBuiltDependencies:
+  - esbuild
