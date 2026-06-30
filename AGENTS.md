@@ -24,6 +24,6 @@ siblings through `'../<sibling>/index.js'`, never their internals.
 
 Named exports only; no classes; `.js` extensions on relative imports.
 
-Active checks in this repo: types, test, links.
+Active checks in this repo: types, lint, test, links.
 
 <!-- checkride:end -->

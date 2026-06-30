@@ -1,6 +1,7 @@
 {
   "checks": {
     "types": "tsc",
+    "lint": "biome",
     "links": "links"
   }
 }

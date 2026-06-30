@@ -12,6 +12,7 @@
     "check": "checkride"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.2.4",
     "@vitest/coverage-v8": "^4.1.9",
     "checkride": "^0.1.5",
     "typescript": "^5.7.0",
