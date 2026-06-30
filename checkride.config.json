@@ -1,7 +1,17 @@
 {
   "checks": {
     "types": "tsc",
-    "lint": "biome",
-    "links": "links"
+    "lint": {
+      "use": "biome",
+      "args": ["exec", "biome", "lint", "--reporter=json"],
+      "fixArgs": ["exec", "biome", "lint", "--write"],
+      "description": "Biome lint (formatting handled by the format slot)"
+    },
+    "links": "links",
+    "format": {
+      "command": "pnpm",
+      "args": ["exec", "biome", "format", "--write", "."],
+      "description": "Biome auto-format (writes fixes in place)"
+    }
   }
 }
