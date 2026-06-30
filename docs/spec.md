@@ -1,47 +1,75 @@
-# Spec — tiny-kit string helpers
+# RFC: tiny-kit string helpers
 
-A throwaway spec to drive one complete plumbbob cycle. Keep every increment
-small: each helper is a pure function with a couple of test cases. The check
-gate is `checkride` (run as `pnpm run check`).
+**Status:** Draft
+**Scope:** Add two pure string helpers (`slugify`, `truncate`) and expose them
+from the package's public entry point.
 
-## Frame
+## Summary
 
-- **Problem:** the library is an empty barrel (`src/index.ts` only exports a
-  version). We want two small, well-tested string helpers and a clean public
-  surface.
-- **Smallest thing that solves it:** add `slugify` and `truncate` as separate
-  pure modules, then re-export both from the barrel.
-- **Done looks like:** `import { slugify, truncate } from 'tiny-kit'` works and
-  `pnpm run check` (checkride) is green.
-- **Explicitly NOT doing:** Unicode/i18n normalization; word-boundary-aware
-  truncation; configurable separators; a build/publish step.
+The library currently ships an empty barrel — `src/index.ts` exports only a
+version. This proposal adds two small, well-tested string utilities and a clean
+public surface, so that `import { slugify, truncate } from 'tiny-kit'` works and
+the test suite (`pnpm run check`) passes.
 
-## Decisions
+## Motivation
 
-- D1: one module per helper (`src/slugify.ts`, `src/truncate.ts`) — *because*
-  it keeps each step's seam tiny and independently testable.
-- D2: `truncate` does a **hard** character cut and appends a single `…`
-  *because* word-boundary logic is explicitly out of scope (see NOT doing).
-- D3: ASCII-only behavior is fine — *because* this is a test repo, not a product.
+`tiny-kit` has no usable functionality yet. Two common string operations —
+turning arbitrary text into a URL-safe slug, and shortening a string to a fixed
+length — are good first additions: each is a pure, zero-dependency function that
+is easy to test in isolation and gives the package a meaningful public API.
+
+## Goals
+
+- Provide `slugify(input: string): string`.
+- Provide `truncate(input: string, max: number): string`.
+- Re-export both helpers from the package barrel while preserving `version`.
+- Keep the test suite green.
+
+## Non-goals
+
+The following are explicitly out of scope for this proposal:
+
+- Unicode / i18n normalization.
+- Word-boundary-aware truncation.
+- Configurable separators.
+- A build or publish step.
+
+## Design
+
+### `slugify(input)`
+
+Lowercases the input, trims surrounding whitespace, replaces each run of
+non-alphanumeric characters with a single `-`, and strips any leading or
+trailing `-`. ASCII-only behavior is acceptable; full Unicode handling is a
+non-goal.
+
+Example: `"  Hello, World!  "` → `"hello-world"`.
+
+### `truncate(input, max)`
+
+Returns `input` unchanged when `input.length <= max`. Otherwise performs a hard
+character cut to `max` characters and appends a single `…`. Word-boundary logic
+is intentionally excluded (see Non-goals).
+
+Example: `truncate("hello world", 5)` → `"hello…"`.
+
+### Module layout
+
+Each helper lives in its own module — `src/slugify.ts` and `src/truncate.ts` —
+keeping the two utilities independently testable. The barrel `src/index.ts`
+re-exports both alongside the existing `version`.
 
 ## Constraints
 
-- C1: no new runtime dependencies (helpers are pure, zero-dep).
-- C2: every helper ships with its own test file; checkride must stay green.
-- C3: don't touch `package.json`, `tsconfig.json`, or the check wiring.
+- No new runtime dependencies; the helpers are pure and zero-dependency.
+- Every helper ships with its own test file, and the test suite must stay green.
+- No changes to `package.json`, `tsconfig.json`, or the check tooling.
 
-## Steps
+## Implementation plan
 
-1. [ ] Add `slugify(input: string): string` — lowercases, trims, replaces runs
-   of non-alphanumerics with a single `-`, and strips leading/trailing `-`.
-   - **done when:** `test/slugify.test.ts` passes (e.g. `"  Hello, World!  "` → `"hello-world"`).
-   - seam: `src/slugify.ts`, `test/slugify.test.ts`
-2. [ ] Add `truncate(input: string, max: number): string` — returns `input`
-   unchanged when `input.length <= max`, otherwise a hard cut to `max` chars
-   with a trailing `…`.
-   - **done when:** `test/truncate.test.ts` passes (e.g. `truncate("hello world", 5)` → `"hello…"`).
-   - seam: `src/truncate.ts`, `test/truncate.test.ts`
-3. [ ] Re-export both helpers from the barrel `src/index.ts` (keep `version`).
-   - **done when:** `test/index.test.ts` imports `slugify` and `truncate` from
-     `../src/index` and both are callable.
-   - seam: `src/index.ts`, `test/index.test.ts`
+1. Add `slugify` in `src/slugify.ts`, covered by `test/slugify.test.ts`
+   (e.g. `"  Hello, World!  "` → `"hello-world"`).
+2. Add `truncate` in `src/truncate.ts`, covered by `test/truncate.test.ts`
+   (e.g. `truncate("hello world", 5)` → `"hello…"`).
+3. Re-export both helpers from `src/index.ts` (keeping `version`), verified by
+   `test/index.test.ts` importing `slugify` and `truncate` from `../src/index`.
